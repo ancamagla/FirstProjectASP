@@ -1,0 +1,52 @@
+﻿@using FirstProjectASP.Models
+
+@{
+    ViewBag.Title = "Home Page";
+}
+@{
+    var articles = (List<Article>)ViewData["Articles"];
+    var header = (Header)ViewData["Header"];
+}
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+<div>
+    <center>
+        <!--Header-->
+        <div class="headerSize" style="width:80%!important">
+            <p class="headerTile">@header.TitleHeader</p>
+            <p class="headerDecription">@header.DescriptionHeader</p>
+        </div>
+        <br />
+
+        <!--Content-->
+        <div style="width:80%">
+            @foreach (var item in articles)
+            {
+
+                <div style="display:inline-block; margin-left:10px; background-color:antiquewhite;">
+                    <img style="height:160px; width:225px;" src="@item.Image.Replace("~", "")" />
+                    <div style="height:200px;width:225px;">
+                        <p style="color:forestgreen;text-align:left">@item.Type</p>
+                        <p style="text-align:left;">@item.Title</p>
+                        <p style="text-align:left">@item.ArticleDate.ToString("MMM-dd-yyyy")</p>
+                        <p>@item.ShortDescription</p>
+                    </div>
+                    <button onclick="ReadMore(@item.Id)" style="background-color:orange;width:200px;cursor:pointer">Read more...</button>
+                </div>
+
+                if ((articles.IndexOf(item)) % 3 == 2)
+                {
+                    <br /><br />
+                }
+            }
+        </div>
+    </center>
+</div>
+<script>
+
+
+    function ReadMore(id) {
+        window.location.href= '@Url.Action("About", "Home")/'+ id;
+    }
+</script>

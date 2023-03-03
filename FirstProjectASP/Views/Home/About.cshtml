@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+@using FirstProjectASP.Models
+
+@{
+    var articles = (Article)ViewData["Articles"];
+    var header = (Header)ViewData["Header"];
+}
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+<div>
+    <center>
+        <!--Header-->
+        <div class="headerSize">
+            <p class="headerTile">@header.TitleHeader</p>
+            <p class="headerDecription">@header.DescriptionHeader</p>
+        </div>
+        <br />
+
+        <!--Content-->
+        <div style="background-color: antiquewhite">
+            <img style="width:100%;" src="@articles.ImageFull" />
+            <div style="margin-top:15px;">
+                <p style="color:forestgreen;text-align:left;margin-left:12px">@articles.Type</p>
+                <p style="text-align: left; margin-left: 12px">@articles.Title</p>
+                <p style="text-align: left; margin-left: 12px ">@articles.ArticleDate.ToString("MMM-dd-yyyy")</p>
+                <p style="font-size: smaller; text-align: left; margin-left: 12px ">@articles.LongDescription</p>
+            </div>
+        </div>
+    </center>
+</div>
